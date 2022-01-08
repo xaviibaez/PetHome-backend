@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
   @GetMapping("/all")
   public String allAccess() {
-    return String.valueOf(HttpStatus.OK.value());
+    //return String.valueOf(HttpStatus.OK.value());
+    return "Public Content";
   }
 
   @GetMapping("/user")
