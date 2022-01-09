@@ -1,8 +1,8 @@
-package com.pethome.springjwt.security.jwt;
+package com.pethome.pethome.security.jwt;
 
 import java.util.Date;
 
-import com.pethome.springjwt.security.services.UserDetailsImpl;
+import com.pethome.pethome.security.services.UserDetailsImpl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

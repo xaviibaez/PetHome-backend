@@ -1,4 +1,4 @@
-package com.pethome.springjwt.controllers;
+package com.pethome.pethome.controllers;
 
 import java.util.HashSet;
 import java.util.List;
@@ -7,17 +7,17 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
-import com.pethome.springjwt.models.ERole;
-import com.pethome.springjwt.models.Role;
-import com.pethome.springjwt.models.User;
-import com.pethome.springjwt.payload.request.LoginRequest;
-import com.pethome.springjwt.payload.request.SignupRequest;
-import com.pethome.springjwt.payload.response.JwtResponse;
-import com.pethome.springjwt.payload.response.MessageResponse;
-import com.pethome.springjwt.repository.RoleRepository;
-import com.pethome.springjwt.repository.UserRepository;
-import com.pethome.springjwt.security.jwt.JwtUtils;
-import com.pethome.springjwt.security.services.UserDetailsImpl;
+import com.pethome.pethome.models.ERole;
+import com.pethome.pethome.models.Role;
+import com.pethome.pethome.models.User;
+import com.pethome.pethome.payload.request.LoginRequest;
+import com.pethome.pethome.payload.request.SignupRequest;
+import com.pethome.pethome.payload.response.JwtResponse;
+import com.pethome.pethome.payload.response.MessageResponse;
+import com.pethome.pethome.repository.RoleRepository;
+import com.pethome.pethome.repository.UserRepository;
+import com.pethome.pethome.security.jwt.JwtUtils;
+import com.pethome.pethome.security.services.UserDetailsImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

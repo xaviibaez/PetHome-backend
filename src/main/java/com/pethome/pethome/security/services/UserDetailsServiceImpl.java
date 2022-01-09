@@ -1,7 +1,7 @@
-package com.pethome.springjwt.security.services;
+package com.pethome.pethome.security.services;
 
-import com.pethome.springjwt.models.User;
-import com.pethome.springjwt.repository.UserRepository;
+import com.pethome.pethome.models.User;
+import com.pethome.pethome.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -1,4 +1,4 @@
-package com.pethome.springjwt.models;
+package com.pethome.pethome.models;
 
 import java.util.HashSet;
 import java.util.Set;

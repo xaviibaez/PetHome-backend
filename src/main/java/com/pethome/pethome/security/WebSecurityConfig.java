@@ -1,8 +1,8 @@
-package com.pethome.springjwt.security;
+package com.pethome.pethome.security;
 
-import com.pethome.springjwt.security.jwt.AuthEntryPointJwt;
-import com.pethome.springjwt.security.jwt.AuthTokenFilter;
-import com.pethome.springjwt.security.services.UserDetailsServiceImpl;
+import com.pethome.pethome.security.jwt.AuthEntryPointJwt;
+import com.pethome.pethome.security.jwt.AuthTokenFilter;
+import com.pethome.pethome.security.services.UserDetailsServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

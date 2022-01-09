@@ -1,4 +1,4 @@
-package com.pethome.springjwt.security.jwt;
+package com.pethome.pethome.security.jwt;
 
 import java.io.IOException;
 import java.util.HashMap;

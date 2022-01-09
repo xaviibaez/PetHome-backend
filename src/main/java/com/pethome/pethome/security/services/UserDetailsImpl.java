@@ -1,4 +1,4 @@
-package com.pethome.springjwt.security.services;
+package com.pethome.pethome.security.services;
 
 import java.util.Collection;
 import java.util.List;
@@ -10,7 +10,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.pethome.springjwt.models.User;
+import com.pethome.pethome.models.User;
 
 public class UserDetailsImpl implements UserDetails {
   private static final long serialVersionUID = 1L;

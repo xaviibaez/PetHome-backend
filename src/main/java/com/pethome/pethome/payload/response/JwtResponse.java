@@ -1,4 +1,4 @@
-package com.pethome.springjwt.payload.response;
+package com.pethome.pethome.payload.response;
 
 import java.util.List;
 

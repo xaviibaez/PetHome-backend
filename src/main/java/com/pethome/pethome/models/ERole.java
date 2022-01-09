@@ -1,4 +1,4 @@
-package com.pethome.springjwt.models;
+package com.pethome.pethome.models;
 
 public enum ERole {
   ROLE_USER,

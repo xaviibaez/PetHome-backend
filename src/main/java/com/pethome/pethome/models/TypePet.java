@@ -1,4 +1,4 @@
-package com.pethome.springjwt.models;
+package com.pethome.pethome.models;
 
 import javax.persistence.*;
 

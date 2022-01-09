@@ -1,8 +1,8 @@
-package com.pethome.springjwt.repository;
+package com.pethome.pethome.repository;
 
 import java.util.Optional;
 
-import com.pethome.springjwt.models.User;
+import com.pethome.pethome.models.User;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

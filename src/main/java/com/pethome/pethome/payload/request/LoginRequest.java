@@ -1,4 +1,4 @@
-package com.pethome.springjwt.payload.request;
+package com.pethome.pethome.payload.request;
 
 import javax.validation.constraints.NotBlank;
 
