@@ -5,12 +5,11 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "pets", uniqueConstraints = {
-    @UniqueConstraint(columnNames = "name")
-})
+@Table(name = "pets")
 public class Pet {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id")
   private Long id;
 
   @NotBlank
@@ -18,14 +17,15 @@ public class Pet {
   private String name;
 
   @NotBlank
-  private Long typeId;
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "type_id", referencedColumnName = "id")
+  private TypePet typePet;
 
   public Pet() {
   }
 
-  public Pet(String name, Long typeId) {
+  public Pet(String name) {
     this.name = name;
-    this.typeId = typeId;
   }
 
   public Long getId() {

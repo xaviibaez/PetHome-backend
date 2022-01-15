@@ -7,13 +7,13 @@ import javax.persistence.*;
 public class TypePet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer id;
 
     @Column(length = 20)
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "type_id")
+    @OneToOne(mappedBy = "typePet")
     private Pet pet;
 
     public TypePet() {
