@@ -11,6 +11,7 @@ import com.pethome.pethome.exception.ResourceDuplicateException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,12 +32,14 @@ public class PetController implements IPetController{
 	
 	// get all pets
 	@GetMapping("/pets")
+	@PreAuthorize("hasRole('ROLE_USER')")
 	public List<Pet> getAllPets(){
 		return petRepository.findAll();
 	}		
 	
 	// create pet rest api
 	@PostMapping("/pets")
+	@PreAuthorize("hasRole('ROLE_MODERATOR')")
 	public Pet createPet(@RequestBody Pet pet) {
 		if(!petRepository.existsById(pet.getId())){
 			return petRepository.save(pet);
@@ -48,6 +51,7 @@ public class PetController implements IPetController{
 	
 	// get pet by id rest api
 	@GetMapping("/pets/{id}")
+	@PreAuthorize("hasRole('ROLE_USER')")
 	public ResponseEntity<Pet> getPetById(@PathVariable Long id) {
 		Pet pet = petRepository.findById(id).
             orElseThrow(() -> new ResourceNotFoundException("Pet not exist with id :" + id));
@@ -57,6 +61,7 @@ public class PetController implements IPetController{
 	
 	// update pet rest api
 	@PutMapping("/pets/{id}")
+	@PreAuthorize("hasRole('ROLE_MODERATOR')")
 	public ResponseEntity<Pet> updatePet(@PathVariable Long id, @RequestBody Pet petDetails){
 		Pet pet = petRepository.findById(id).
             orElseThrow(() -> new ResourceNotFoundException("Pet not exist with id :" + id));
@@ -69,6 +74,7 @@ public class PetController implements IPetController{
 	
 	// delete pet rest api
 	@DeleteMapping("/pets/{id}")
+	@PreAuthorize("hasRole('ROLE_MODERATOR')")
 	public ResponseEntity<Map<String, Boolean>> deletePet(@PathVariable Long id){
 		Pet pet = petRepository.findById(id).
             orElseThrow(() -> new ResourceNotFoundException("Pet not exist with id :" + id));
