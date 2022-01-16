@@ -32,7 +32,6 @@ public class PetController implements IPetController{
 	
 	// get all pets
 	@GetMapping("/pets")
-	@PreAuthorize("hasRole('ROLE_USER')")
 	public List<Pet> getAllPets(){
 		return petRepository.findAll();
 	}		
