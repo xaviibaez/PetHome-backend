@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.pethome.pethome.models.Pet;
+import com.pethome.pethome.models.User;
 import com.pethome.pethome.repository.PetRepository;
+import com.pethome.pethome.repository.UserRepository;
 import com.pethome.pethome.exception.ResourceNotFoundException;
 import com.pethome.pethome.exception.ResourceDuplicateException;
 
@@ -29,11 +31,22 @@ public class PetController implements IPetController{
 
     @Autowired
 	private PetRepository petRepository;
-	
+
+	@Autowired
+	private UserRepository userRepository;
+
 	// get all pets
 	@GetMapping("/pets")
 	public List<Pet> getAllPets(){
 		return petRepository.findAll();
+	}	
+	
+	// get all users
+	@GetMapping("/petsByUser/{id}")
+	public List<Pet> getAllPetsByUsers(@PathVariable Long id){
+		User user = userRepository.findById(id).
+			orElseThrow(() -> new ResourceNotFoundException("User not exist with id :" + id));
+		return user.getPets();
 	}		
 	
 	// create pet rest api

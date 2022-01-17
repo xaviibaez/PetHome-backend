@@ -1,6 +1,8 @@
 package com.pethome.pethome.models;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -37,6 +39,12 @@ public class User {
         joinColumns = @JoinColumn(name = "user_id"), 
         inverseJoinColumns = @JoinColumn(name = "role_id"))
   private Set<Role> roles = new HashSet<>();
+
+  @OneToMany(
+        cascade = CascadeType.ALL,
+        orphanRemoval = true
+    )
+  private List<Pet> pets = new ArrayList<>();
 
   public User() {
   }
@@ -85,5 +93,13 @@ public class User {
 
   public void setRoles(Set<Role> roles) {
     this.roles = roles;
+  }
+
+  public List<Pet> getPets() {
+    return this.pets;
+  }
+
+  public void setPets(List<Pet> pets) {
+    this.pets = pets;
   }
 }
