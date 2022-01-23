@@ -41,7 +41,7 @@ public class PetController implements IPetController{
 		return petRepository.findAll();
 	}	
 	
-	// get all users
+	// get all pets per user
 	@GetMapping("/petsByUser/{id}")
 	public List<Pet> getAllPetsByUsers(@PathVariable Long id){
 		User user = userRepository.findById(id).
