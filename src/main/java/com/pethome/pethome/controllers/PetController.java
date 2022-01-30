@@ -5,8 +5,10 @@ import java.util.List;
 import java.util.Map;
 
 import com.pethome.pethome.models.Pet;
+import com.pethome.pethome.models.TypePet;
 import com.pethome.pethome.models.User;
 import com.pethome.pethome.repository.PetRepository;
+import com.pethome.pethome.repository.TypePetRepository;
 import com.pethome.pethome.repository.UserRepository;
 import com.pethome.pethome.exception.ResourceNotFoundException;
 import com.pethome.pethome.exception.ResourceDuplicateException;
@@ -35,6 +37,9 @@ public class PetController implements IPetController{
 	@Autowired
 	private UserRepository userRepository;
 
+	@Autowired
+	private TypePetRepository typePetRepository;
+
 	// get all pets
 	@GetMapping("/pets")
 	public List<Pet> getAllPets(){
@@ -47,7 +52,13 @@ public class PetController implements IPetController{
 		User user = userRepository.findById(id).
 			orElseThrow(() -> new ResourceNotFoundException("User not exist with id :" + id));
 		return user.getPets();
-	}		
+	}
+	
+	// get all type pets
+	@GetMapping("/typePets")
+	public List<TypePet> getAllTypePets(){
+		return typePetRepository.findAll();
+	}
 	
 	// create pet rest api
 	@PostMapping("/pets")
@@ -68,8 +79,7 @@ public class PetController implements IPetController{
 		Pet pet = petRepository.findById(id).
             orElseThrow(() -> new ResourceNotFoundException("Pet not exist with id :" + id));
     
-		//JSONObject jsonObject = new JSONObject();
-		//return jsonObject.put("pet", pet);
+		
 		return ResponseEntity.ok(pet);
 	}
 	
