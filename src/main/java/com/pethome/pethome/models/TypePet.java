@@ -2,6 +2,8 @@ package com.pethome.pethome.models;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "type_pets")
 public class TypePet {
@@ -14,6 +16,7 @@ public class TypePet {
     private String name;
 
     @OneToOne(mappedBy = "typePet")
+    @JsonBackReference
     private Pet pet;
 
     public TypePet() {

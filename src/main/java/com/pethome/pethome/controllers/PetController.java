@@ -63,17 +63,19 @@ public class PetController implements IPetController{
 	
 	// get pet by id rest api
 	@GetMapping("/pets/{id}")
-	@PreAuthorize("hasRole('ROLE_USER')")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<Pet> getPetById(@PathVariable Long id) {
 		Pet pet = petRepository.findById(id).
             orElseThrow(() -> new ResourceNotFoundException("Pet not exist with id :" + id));
-        
+    
+		//JSONObject jsonObject = new JSONObject();
+		//return jsonObject.put("pet", pet);
 		return ResponseEntity.ok(pet);
 	}
 	
 	// update pet rest api
 	@PutMapping("/pets/{id}")
-	@PreAuthorize("hasRole('ROLE_MODERATOR')")
+	@PreAuthorize("hasRole('ROLE_MODERATOR') or hasRole('ROLE_ADMIN')")
 	public ResponseEntity<Pet> updatePet(@PathVariable Long id, @RequestBody Pet petDetails){
 		Pet pet = petRepository.findById(id).
             orElseThrow(() -> new ResourceNotFoundException("Pet not exist with id :" + id));

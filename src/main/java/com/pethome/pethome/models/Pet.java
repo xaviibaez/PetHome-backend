@@ -4,6 +4,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "pets")
 public class Pet {
@@ -16,9 +18,9 @@ public class Pet {
   @Size(max = 20)
   private String name;
 
-  @NotBlank
   @OneToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "type_id", referencedColumnName = "id")
+  @JsonManagedReference
   private TypePet typePet;
 
   public Pet() {
