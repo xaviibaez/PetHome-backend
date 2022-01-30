@@ -45,4 +45,12 @@ public class Pet {
   public void setName(String name) {
     this.name = name;
   }
+
+  public TypePet getTypePet(){
+    return typePet;
+  }
+
+  public void setTypePet(TypePet typePet){
+    this.typePet = typePet;
+  }
 }
