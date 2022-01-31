@@ -43,7 +43,7 @@ public class PetController implements IPetController{
 	// get all pets
 	@GetMapping("/pets")
 	public List<Pet> getAllPets(){
-		return petRepository.findAll();
+ 		return petRepository.findAll();
 	}	
 	
 	// get all pets per user
@@ -85,7 +85,7 @@ public class PetController implements IPetController{
 	
 	// update pet rest api
 	@PutMapping("/pets/{id}")
-	@PreAuthorize("hasRole('ROLE_MODERATOR') or hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<Pet> updatePet(@PathVariable Long id, @RequestBody Pet petDetails){
 		Pet pet = petRepository.findById(id).
             orElseThrow(() -> new ResourceNotFoundException("Pet not exist with id :" + id));
