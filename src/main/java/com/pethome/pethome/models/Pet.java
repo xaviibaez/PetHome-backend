@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -18,9 +19,10 @@ public class Pet {
   @Size(max = 20)
   private String name;
 
-  @OneToOne(cascade = CascadeType.ALL)
+  @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   @JoinColumn(name = "type_id", referencedColumnName = "id")
   @JsonManagedReference
+  @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
   private TypePet typePet;
 
   public Pet() {

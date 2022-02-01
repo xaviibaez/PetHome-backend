@@ -10,12 +10,12 @@ public class TypePet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
+    private Long id;
 
     @Column(length = 20)
     private String name;
 
-    @OneToOne(mappedBy = "typePet")
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "typePet", cascade = CascadeType.ALL)
     @JsonBackReference
     private Pet pet;
 
@@ -27,11 +27,11 @@ public class TypePet {
         this.name = name;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

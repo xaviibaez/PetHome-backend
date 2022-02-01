@@ -90,9 +90,13 @@ public class PetController implements IPetController{
 		Pet pet = petRepository.findById(id).
             orElseThrow(() -> new ResourceNotFoundException("Pet not exist with id :" + id));
 		
+		TypePet typePet = typePetRepository.findById(Long.valueOf(petDetails.getTypePet().getName()))
+			.orElseThrow(() -> new ResourceNotFoundException("TypePet not exist with id :" + petDetails.getTypePet().getId()));
+
 		pet.setName(petDetails.getName());
-		pet.setTypePet(petDetails.getTypePet());
-		
+		// pet.setTypePet(petDetails.getTypePet());
+		pet.setTypePet(typePet);
+
 		Pet updatedPet = petRepository.save(pet);
 		return ResponseEntity.ok(updatedPet);
 	}
