@@ -59,7 +59,7 @@ INSERT INTO roles(name) VALUES('ROLE_ADMIN');
 
 ```
 
+## XAMPP config route
 ```
-npm install react-scripts
-npm audit fix
+C:\xampp\phpMyAdmin\libraries
 ```
