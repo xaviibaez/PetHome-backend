@@ -1,5 +1,7 @@
 package com.pethome.pethome.models;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -15,10 +17,13 @@ public class TypePet {
     @Column(length = 20)
     private String name;
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "typePet", cascade = CascadeType.ALL)
-    @JsonBackReference
-    private Pet pet;
+    // @OneToOne(fetch = FetchType.LAZY, mappedBy = "typePet", cascade = CascadeType.ALL)
+    // @JsonBackReference
+    // private Pet pet;
 
+    @OneToMany(mappedBy = "typePet", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Pet> pets;
+    
     public TypePet() {
 
     }

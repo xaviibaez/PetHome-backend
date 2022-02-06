@@ -19,10 +19,14 @@ public class Pet {
   @Size(max = 20)
   private String name;
 
-  @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-  @JoinColumn(name = "type_id", referencedColumnName = "id")
-  @JsonManagedReference
-  @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+  // @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  // @JoinColumn(name = "type_id", referencedColumnName = "id")
+  // @JsonManagedReference
+  // @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+  // private TypePet typePet;
+
+  @ManyToOne()
+  @JoinColumn(name = "typePet", referencedColumnName = "id")
   private TypePet typePet;
 
   public Pet() {
