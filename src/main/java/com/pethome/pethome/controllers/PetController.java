@@ -62,30 +62,29 @@ public class PetController implements IPetController{
 	
 	// create pet rest api
 	@PostMapping("/pets")
-	@PreAuthorize("hasRole('ROLE_MODERATOR')")
-	public Pet createPet(@RequestBody Pet pet) {
-		if(!petRepository.existsById(pet.getId())){
-			return petRepository.save(pet);
-		}
-		else{
-			throw new ResourceDuplicateException("Pet alredy exist with id :" + pet.getId());
-		}
+	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
+	public Pet createPet(@RequestBody Pet petDetails) {
+		TypePet typePetDetails = typePetRepository.findById(Long.valueOf(petDetails.getTypePet().getName()))
+			.orElseThrow(() -> new ResourceNotFoundException("TypePet not exist with id :" + petDetails.getTypePet().getId()));
+
+		Pet addPet = new Pet(petDetails.getName(), typePetDetails);
+
+		return petRepository.save(addPet);
 	}
 	
 	// get pet by id rest api
 	@GetMapping("/pets/{id}")
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
 	public ResponseEntity<Pet> getPetById(@PathVariable Long id) {
 		Pet pet = petRepository.findById(id).
             orElseThrow(() -> new ResourceNotFoundException("Pet not exist with id :" + id));
-    
-		
+    	
 		return ResponseEntity.ok(pet);
 	}
 	
 	// update pet rest api
 	@PutMapping("/pets/{id}")
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
 	public ResponseEntity<Pet> updatePet(@PathVariable Long id, @RequestBody Pet petDetails){
 		Pet pet = petRepository.findById(id).
             orElseThrow(() -> new ResourceNotFoundException("Pet not exist with id :" + id));
@@ -94,7 +93,6 @@ public class PetController implements IPetController{
 			.orElseThrow(() -> new ResourceNotFoundException("TypePet not exist with id :" + petDetails.getTypePet().getId()));
 
 		pet.setName(petDetails.getName());
-		// pet.setTypePet(petDetails.getTypePet());
 		pet.setTypePet(typePet);
 
 		Pet updatedPet = petRepository.save(pet);
@@ -103,7 +101,7 @@ public class PetController implements IPetController{
 	
 	// delete pet rest api
 	@DeleteMapping("/pets/{id}")
-	@PreAuthorize("hasRole('ROLE_MODERATOR')")
+	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
 	public ResponseEntity<Map<String, Boolean>> deletePet(@PathVariable Long id){
 		Pet pet = petRepository.findById(id).
             orElseThrow(() -> new ResourceNotFoundException("Pet not exist with id :" + id));
