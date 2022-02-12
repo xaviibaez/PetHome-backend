@@ -32,8 +32,9 @@ public class Pet {
   public Pet() {
   }
 
-  public Pet(String name) {
+  public Pet(String name, TypePet typePet) {
     this.name = name;
+    this.typePet = typePet;
   }
 
   public Long getId() {
