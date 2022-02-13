@@ -19,6 +19,21 @@ public class Pet {
   @Size(max = 20)
   private String name;
 
+  @NotBlank
+  @Size(max = 50)
+  private String description;
+
+  @NotBlank
+  @Size(max = 20)
+  private String behaviour;
+
+  @NotBlank
+  private int age;
+
+  @NotBlank
+  private boolean sterilized;
+
+
   // @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   // @JoinColumn(name = "type_id", referencedColumnName = "id")
   // @JsonManagedReference
