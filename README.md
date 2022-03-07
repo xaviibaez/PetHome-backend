@@ -19,7 +19,7 @@
 Open `src/main/resources/application.properties`
 - For PostgreSQL:
 ```
-spring.datasource.url= jdbc:postgresql://localhost:5432/testdb
+spring.datasource.url= jdbc:postgresql://localhost:5432/pethomedb
 spring.datasource.username= postgres
 spring.datasource.password= 123
 
@@ -35,7 +35,7 @@ bezkoder.app.jwtExpirationMs= 86400000
 ```
 - For MySQL
 ```
-spring.datasource.url= jdbc:mysql://localhost:3306/testdb?useSSL=false
+spring.datasource.url= jdbc:mysql://localhost:3306/pethomedb?useSSL=false
 spring.datasource.username= root
 spring.datasource.password= 123456
 
