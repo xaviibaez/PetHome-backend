@@ -34,11 +34,9 @@ public class User {
   @Size(max = 120)
   private String password;
 
-  @NotBlank
   @Size(max = 20)
   private String address;
 
-  @NotBlank
   @Size(max = 50)
   private String description;
 
