@@ -75,4 +75,42 @@ public class Pet {
   public void setTypePet(TypePet typePet){
     this.typePet = typePet;
   }
+
+
+  public String getDescription() {
+    return this.description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  public String getBehaviour() {
+    return this.behaviour;
+  }
+
+  public void setBehaviour(String behaviour) {
+    this.behaviour = behaviour;
+  }
+
+  public int getAge() {
+    return this.age;
+  }
+
+  public void setAge(int age) {
+    this.age = age;
+  }
+
+  public boolean isSterilized() {
+    return this.sterilized;
+  }
+
+  public boolean getSterilized() {
+    return this.sterilized;
+  }
+
+  public void setSterilized(boolean sterilized) {
+    this.sterilized = sterilized;
+  }
+
 }

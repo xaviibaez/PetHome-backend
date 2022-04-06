@@ -57,6 +57,10 @@ INSERT INTO roles(name) VALUES('ROLE_USER');
 INSERT INTO roles(name) VALUES('ROLE_MODERATOR');
 INSERT INTO roles(name) VALUES('ROLE_ADMIN');
 
+INSERT INTO `type_pets` (`id`, `name`) VALUES (NULL, 'cat'), (NULL, 'dog'), (NULL, 'fish');
+
+INSERT INTO `pets` (`id`, `age`, `behaviour`, `description`, `name`, `sterilized`, `type_pet`) VALUES (NULL, '1', 'Good', 'Good Desc', 'Dog1', b'0000', '2'), (NULL, '3', 'Bad', 'Bad Desc', 'Cat1', b'00000', '1');
+
 ```
 
 ## XAMPP config route
