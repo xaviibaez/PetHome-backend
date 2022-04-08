@@ -1,5 +1,7 @@
 package com.pethome.pethome.models;
 
+import java.util.Objects;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -47,10 +49,16 @@ public class Pet {
   public Pet() {
   }
 
-  public Pet(String name, TypePet typePet) {
+
+  public Pet(String name, String description, String behaviour, int age, boolean sterilized, TypePet typePet) {
     this.name = name;
+    this.description = description;
+    this.behaviour = behaviour;
+    this.age = age;
+    this.sterilized = sterilized;
     this.typePet = typePet;
   }
+  
 
   public Long getId() {
     return id;
@@ -113,4 +121,25 @@ public class Pet {
     this.sterilized = sterilized;
   }
 
+  @Override
+  public boolean equals(Object o) {
+
+    if (this == o)
+      return true;
+    if (!(o instanceof Pet))
+      return false;
+
+    Pet pet = (Pet) o;
+    return Objects.equals(this.id, pet.id) && Objects.equals(this.name, pet.name);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(this.id, this.name);
+  }
+
+  @Override
+  public String toString() {
+    return "Pet{" + "id=" + this.id + ", name='" + this.name + '}';
+  }
 }

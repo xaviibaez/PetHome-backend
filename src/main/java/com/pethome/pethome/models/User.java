@@ -3,6 +3,7 @@ package com.pethome.pethome.models;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -108,4 +109,26 @@ public class User {
   public void setPets(List<Pet> pets) {
     this.pets = pets;
   }
+
+  @Override
+    public boolean equals(Object o) {
+
+      if (this == o)
+        return true;
+      if (!(o instanceof User))
+        return false;
+
+      User user = (User) o;
+      return Objects.equals(this.id, user.id) && Objects.equals(this.email, user.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.id, this.email);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" + "id=" + this.id + ", email='" + this.email + '}';
+    }
 }
