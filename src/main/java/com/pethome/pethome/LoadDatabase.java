@@ -1,4 +1,4 @@
-package com.pethome.pethome;
+/*package com.pethome.pethome;
 
 import com.pethome.pethome.models.Role;
 import com.pethome.pethome.models.TypePet;
@@ -26,9 +26,11 @@ public class LoadDatabase {
   @Bean
   CommandLineRunner initDatabaseRole(RoleRepository roleRepository) {
     return args -> {
-      log.info("Preloading " + roleRepository.save(new Role(ERole.ROLE_USER)));
-      log.info("Preloading " + roleRepository.save(new Role(ERole.ROLE_MODERATOR)));
-      log.info("Preloading " + roleRepository.save(new Role(ERole.ROLE_ADMIN)));
+      if(!roleRepository.existsByName((long) 1)){
+        log.info("Preloading " + roleRepository.save(new Role(ERole.ROLE_USER)));
+        log.info("Preloading " + roleRepository.save(new Role(ERole.ROLE_MODERATOR)));
+        log.info("Preloading " + roleRepository.save(new Role(ERole.ROLE_ADMIN)));
+      }
     };
   }
 
@@ -41,11 +43,11 @@ public class LoadDatabase {
   }
 
   @Bean
-  CommandLineRunner initDatabaseTypePet(PetRepository petRepository) {
-
+  CommandLineRunner initDatabasePet(PetRepository petRepository) {
     return args -> {
       log.info("Preloading " + petRepository.save(new Pet("Perrito", "Descripcion Perro", "Comportamiento Perro", 1, true, typePetRepository.findByName("Dog").get())));
       log.info("Preloading " + petRepository.save(new Pet("Gatito", "Descripcion Gato", "Comportamiento Gato", 2, false, typePetRepository.findByName("Cat").get())));
     };
   }
 }
+*/

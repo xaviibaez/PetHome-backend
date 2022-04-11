@@ -60,7 +60,13 @@ public class Pet {
   }
   
 
-  public Long getId() {
+  public Pet(String name, TypePet typePetDetails) {
+    this.name = name;
+    this.typePet = typePetDetails;
+}
+
+
+public Long getId() {
     return id;
   }
 
