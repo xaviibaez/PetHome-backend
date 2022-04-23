@@ -1,15 +1,19 @@
 package com.pethome.pethome.payload.Pet;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 public class PetRequest {
     @NotBlank
+    @Size(max = 20)
   	private String name;
 
 	@NotBlank
+    @Size(max = 50)
 	private String description;
 
     @NotBlank
+    @Size(max = 20)
 	private String behaviour;
 
     @NotBlank
@@ -21,6 +25,11 @@ public class PetRequest {
     @NotBlank
 	private String typePet;
 
+    @NotBlank
+    private boolean adopted;
+
+    @NotBlank
+    private boolean urgentAdoption;
 
     public String getName() {
         return this.name;
@@ -72,6 +81,30 @@ public class PetRequest {
 
     public void setTypePet(String typePet) {
         this.typePet = typePet;
+    }
+
+    public boolean isAdopted() {
+        return this.adopted;
+    }
+
+    public boolean getAdopted() {
+        return this.adopted;
+    }
+
+    public void setAdopted(boolean adopted) {
+        this.adopted = adopted;
+    }
+
+    public boolean isUrgentAdoption() {
+        return this.urgentAdoption;
+    }
+
+    public boolean getUrgentAdoption() {
+        return this.urgentAdoption;
+    }
+
+    public void setUrgentAdoption(boolean urgentAdoption) {
+        this.urgentAdoption = urgentAdoption;
     }
 
 }

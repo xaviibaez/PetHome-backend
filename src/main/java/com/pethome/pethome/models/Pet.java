@@ -6,8 +6,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+//import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+//import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "pets")
@@ -30,10 +30,19 @@ public class Pet {
   private String behaviour;
 
   @NotBlank
+  private String sex;
+
+  @NotBlank
   private int age;
 
   @NotBlank
   private boolean sterilized;
+
+  @NotBlank
+  private boolean adopted;
+
+  @NotBlank
+  private boolean urgentAdoption;
 
 
   // @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -59,12 +68,23 @@ public class Pet {
     this.typePet = typePet;
   }
   
+  public Pet(Long id, String name, String description, String behaviour, String sex, int age, boolean sterilized, boolean adopted, boolean urgentAdoption, TypePet typePet) {
+    this.id = id;
+    this.name = name;
+    this.description = description;
+    this.behaviour = behaviour;
+    this.sex = sex;
+    this.age = age;
+    this.sterilized = sterilized;
+    this.adopted = adopted;
+    this.urgentAdoption = urgentAdoption;
+    this.typePet = typePet;
+  }
 
   public Pet(String name, TypePet typePetDetails) {
     this.name = name;
     this.typePet = typePetDetails;
-}
-
+  }
 
 public Long getId() {
     return id;
@@ -125,6 +145,38 @@ public Long getId() {
 
   public void setSterilized(boolean sterilized) {
     this.sterilized = sterilized;
+  }
+
+  public boolean isAdopted() {
+    return this.adopted;
+  }
+
+  public boolean getAdopted() {
+    return this.adopted;
+  }
+
+  public void setAdopted(boolean adopted) {
+    this.adopted = adopted;
+  }
+
+  public boolean isUrgentAdoption() {
+    return this.urgentAdoption;
+  }
+
+  public boolean getUrgentAdoption() {
+    return this.urgentAdoption;
+  }
+
+  public void setUrgentAdoption(boolean urgentAdoption) {
+    this.urgentAdoption = urgentAdoption;
+  }
+
+  public String getSex() {
+    return this.sex;
+  }
+
+  public void setSex(String sex) {
+    this.sex = sex;
   }
 
   @Override

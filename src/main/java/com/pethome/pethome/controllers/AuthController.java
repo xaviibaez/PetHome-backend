@@ -14,8 +14,8 @@ import com.pethome.pethome.payload.request.LoginRequest;
 import com.pethome.pethome.payload.request.SignupRequest;
 import com.pethome.pethome.payload.response.JwtResponse;
 import com.pethome.pethome.payload.response.MessageResponse;
-import com.pethome.pethome.repository.RoleRepository;
-import com.pethome.pethome.repository.UserRepository;
+import com.pethome.pethome.repository.IRoleRepository;
+import com.pethome.pethome.repository.IUserRepository;
 import com.pethome.pethome.security.jwt.JwtUtils;
 import com.pethome.pethome.security.services.UserDetailsImpl;
 
@@ -40,10 +40,10 @@ public class AuthController implements IAuthController{
   AuthenticationManager authenticationManager;
 
   @Autowired
-  UserRepository userRepository;
+  IUserRepository userRepository;
 
   @Autowired
-  RoleRepository roleRepository;
+  IRoleRepository roleRepository;
 
   @Autowired
   PasswordEncoder encoder;

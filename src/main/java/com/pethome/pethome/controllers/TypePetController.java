@@ -6,7 +6,7 @@ import java.util.Map;
 
 import com.pethome.pethome.models.TypePet;
 import com.pethome.pethome.payload.response.MessageResponse;
-import com.pethome.pethome.repository.TypePetRepository;
+import com.pethome.pethome.repository.ITypePetRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -30,12 +30,12 @@ import com.pethome.pethome.exception.ResourceNotFoundException;
 public class TypePetController implements ITypePetController{
 
 	@Autowired
-	private TypePetRepository typePetRepository;
+	private ITypePetRepository typePetRepository;
 	
 	// get all type pets
 	@GetMapping("/typePets")
-	public List<TypePet> getAllTypePets(){
-		return typePetRepository.findAll();
+	public ResponseEntity<List<TypePet>> getAllTypePets(){
+		return ResponseEntity.ok(typePetRepository.findAll());
 	}
 
 	@Override
@@ -84,8 +84,4 @@ public class TypePetController implements ITypePetController{
 		response.put("deleted", Boolean.TRUE);
 		return ResponseEntity.ok(response);
 	}
-
-	
-
-	
 }

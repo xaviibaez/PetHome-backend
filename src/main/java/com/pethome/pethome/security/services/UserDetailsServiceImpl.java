@@ -1,7 +1,7 @@
 package com.pethome.pethome.security.services;
 
 import com.pethome.pethome.models.User;
-import com.pethome.pethome.repository.UserRepository;
+import com.pethome.pethome.repository.IUserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
   @Autowired
-  UserRepository userRepository;
+  IUserRepository userRepository;
 
   @Override
   @Transactional

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.pethome.pethome.models.User;
-import com.pethome.pethome.repository.UserRepository;
+import com.pethome.pethome.repository.IUserRepository;
 import com.pethome.pethome.exception.ResourceNotFoundException;
 import com.pethome.pethome.exception.ResourceDuplicateException;
 
@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController implements IUserController{
 
     @Autowired
-	private UserRepository userRepository;
+	private IUserRepository userRepository;
 	// get all users
 	@GetMapping("/users")
 	public List<User> getAllUsers(){

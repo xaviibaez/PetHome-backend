@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface TypePetRepository extends JpaRepository<TypePet, Long> {
+public interface ITypePetRepository extends JpaRepository<TypePet, Long> {
     Optional<TypePet> findByName(String name);
     Boolean existsByName(String name);
 }

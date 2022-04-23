@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 public interface ITypePetController {
-    
-    public List<TypePet> getAllTypePets();
+    public ResponseEntity<List<TypePet>> getAllTypePets();
     public ResponseEntity<TypePet> getTypePetById(@PathVariable Long id);
     public ResponseEntity<TypePet> updateTypePet(@PathVariable Long id, @RequestBody TypePet type);
     public ResponseEntity<MessageResponse> createTypePet(@RequestBody TypePet typePet);

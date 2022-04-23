@@ -2,13 +2,13 @@ package com.pethome.pethome.repository;
 
 import java.util.Optional;
 
-import com.pethome.pethome.models.Pet;
+import com.pethome.pethome.models.ERole;
+import com.pethome.pethome.models.Role;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PetRepository extends JpaRepository<Pet, Long> {
-    Optional<Pet> findByName(String username);
-    Boolean existsByName(String username);
+public interface IRoleRepository extends JpaRepository<Role, Long> {
+  Optional<Role> findByName(ERole name);
 }

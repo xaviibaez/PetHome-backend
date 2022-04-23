@@ -8,9 +8,9 @@ import com.pethome.pethome.models.Pet;
 import com.pethome.pethome.models.TypePet;
 import com.pethome.pethome.models.User;
 import com.pethome.pethome.payload.Pet.PetRequest;
-import com.pethome.pethome.repository.PetRepository;
-import com.pethome.pethome.repository.TypePetRepository;
-import com.pethome.pethome.repository.UserRepository;
+import com.pethome.pethome.repository.IPetRepository;
+import com.pethome.pethome.repository.ITypePetRepository;
+import com.pethome.pethome.repository.IUserRepository;
 import com.pethome.pethome.exception.ResourceNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,23 +32,22 @@ import org.springframework.web.bind.annotation.RestController;
 public class PetController implements IPetController{
 
     @Autowired
-	private PetRepository petRepository;
+	private IPetRepository petRepository;
 
 	@Autowired
-	private UserRepository userRepository;
+	private IUserRepository userRepository;
 
 	@Autowired
-	private TypePetRepository typePetRepository;
+	private ITypePetRepository typePetRepository;
 
 	// get all pets
 	@GetMapping("/pets")
-	public List<Pet> getAllPets(){
- 		return petRepository.findAll();
+	public ResponseEntity<List<Pet>> getAllPets(){
+ 		return ResponseEntity.ok(petRepository.findAll());
 	}	
 	
 	// get pet by id
 	@GetMapping("/pets/{id}")
-	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
 	public ResponseEntity<Pet> getPetById(@PathVariable Long id) {
 		Pet pet = petRepository.findById(id).
             orElseThrow(() -> new ResourceNotFoundException("Pet not exist with id :" + id));
@@ -68,13 +67,21 @@ public class PetController implements IPetController{
 	// create pet
 	@PostMapping("/pets")
 	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
-	public Pet createPet(@RequestBody PetRequest petRequest) {
-		TypePet typePetDetails = typePetRepository.findById(Long.valueOf(petRequest.getTypePet()))
+	public ResponseEntity<Pet> createPet(@RequestBody PetRequest petRequest) {
+		TypePet typePet = typePetRepository.findById(Long.valueOf(petRequest.getTypePet()))
 			.orElseThrow(() -> new ResourceNotFoundException("Type pet not exist with id :" + petRequest.getTypePet()));
 
-		Pet addPet = new Pet(petRequest.getName(), typePetDetails);
-
-		return petRepository.save(addPet);
+		Pet pet = new Pet();
+		pet.setName(petRequest.getName());
+		pet.setDescription(petRequest.getDescription());
+		pet.setBehaviour(petRequest.getBehaviour());
+		pet.setAge(petRequest.getAge());
+		pet.setSterilized(petRequest.getSterilized());
+		pet.setAdopted(petRequest.getAdopted());
+		pet.setUrgentAdoption(petRequest.getUrgentAdoption());
+		pet.setTypePet(typePet);
+		
+		return ResponseEntity.ok(petRepository.save(pet));
 	}
 	
 	// update pet
@@ -92,11 +99,11 @@ public class PetController implements IPetController{
 		pet.setBehaviour(petRequest.getBehaviour());
 		pet.setAge(petRequest.getAge());
 		pet.setSterilized(petRequest.getSterilized());
+		pet.setAdopted(petRequest.getAdopted());
+		pet.setUrgentAdoption(petRequest.getUrgentAdoption());
 		pet.setTypePet(typePet);
 
-		Pet updatedPet = petRepository.save(pet);
-
-		return ResponseEntity.ok(updatedPet);
+		return ResponseEntity.ok(petRepository.save(pet));
 	}
 	
 	// delete pet
@@ -108,7 +115,8 @@ public class PetController implements IPetController{
 		
 		petRepository.delete(pet);
 		Map<String, Boolean> response = new HashMap<>();
-		response.put("deleted", Boolean.TRUE);
+		response.put("deleted " + "ID: " + pet.getId() + " Name: " + pet.getName(), 
+					Boolean.TRUE);
 		return ResponseEntity.ok(response);
 	}
 }
