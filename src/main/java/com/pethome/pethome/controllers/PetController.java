@@ -45,6 +45,15 @@ public class PetController implements IPetController{
 	public ResponseEntity<List<Pet>> getAllPets(){
  		return ResponseEntity.ok(petRepository.findAll());
 	}	
+
+	// get pet by name
+	@GetMapping("/petsName/{name}")
+	public ResponseEntity<Pet> getPetByName(@PathVariable String name) {
+		Pet pet = petRepository.findByName(name).
+            orElseThrow(() -> new ResourceNotFoundException("Pet not exist with name :" + name));
+    	
+		return ResponseEntity.ok(pet);
+	}
 	
 	// get pet by id
 	@GetMapping("/pets/{id}")
@@ -79,8 +88,9 @@ public class PetController implements IPetController{
 		pet.setSterilized(petRequest.getSterilized());
 		pet.setAdopted(petRequest.getAdopted());
 		pet.setUrgentAdoption(petRequest.getUrgentAdoption());
+		pet.setSex(petRequest.getSex());
 		pet.setTypePet(typePet);
-		
+
 		return ResponseEntity.ok(petRepository.save(pet));
 	}
 	

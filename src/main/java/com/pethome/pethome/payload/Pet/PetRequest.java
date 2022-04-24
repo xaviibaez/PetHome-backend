@@ -17,19 +17,18 @@ public class PetRequest {
 	private String behaviour;
 
     @NotBlank
-	private int age;
-
-    @NotBlank
-	private boolean sterilized;
+	private String sex;
 
     @NotBlank
 	private String typePet;
 
-    @NotBlank
+    private int age;
+
     private boolean adopted;
 
-    @NotBlank
     private boolean urgentAdoption;
+
+    private boolean sterilized;
 
     public String getName() {
         return this.name;
@@ -107,4 +106,11 @@ public class PetRequest {
         this.urgentAdoption = urgentAdoption;
     }
 
+    public String getSex() {
+        return this.sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
 }

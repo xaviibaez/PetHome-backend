@@ -32,16 +32,12 @@ public class Pet {
   @NotBlank
   private String sex;
 
-  @NotBlank
   private int age;
 
-  @NotBlank
   private boolean sterilized;
 
-  @NotBlank
   private boolean adopted;
 
-  @NotBlank
   private boolean urgentAdoption;
 
 
