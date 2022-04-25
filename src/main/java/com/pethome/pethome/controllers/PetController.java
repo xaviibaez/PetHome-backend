@@ -1,5 +1,6 @@
 package com.pethome.pethome.controllers;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,11 +12,13 @@ import com.pethome.pethome.payload.Pet.PetRequest;
 import com.pethome.pethome.repository.IPetRepository;
 import com.pethome.pethome.repository.ITypePetRepository;
 import com.pethome.pethome.repository.IUserRepository;
+import com.pethome.pethome.security.services.UserDetailsImpl;
 import com.pethome.pethome.exception.ResourceNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -91,7 +94,21 @@ public class PetController implements IPetController{
 		pet.setSex(petRequest.getSex());
 		pet.setTypePet(typePet);
 
-		return ResponseEntity.ok(petRepository.save(pet));
+		petRepository.save(pet);
+
+		Object userLogged = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+		if (userLogged instanceof UserDetailsImpl) {
+			Long principalId = ((UserDetailsImpl)userLogged).getId();
+
+			User user = userRepository.findById(principalId).
+				orElseThrow(() -> new ResourceNotFoundException("User not exist with id :" + principalId));
+
+			user.getPets().add(pet);
+			userRepository.save(user);
+		}
+
+		return ResponseEntity.ok(pet);
 	}
 	
 	// update pet
