@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface IPetController {
     public ResponseEntity<List<Pet>> getAllPets();
     public ResponseEntity<Pet> getPetById(@PathVariable Long id);
+    public ResponseEntity<Pet> getPetByName(@PathVariable String name);
     public ResponseEntity<Pet> updatePet(@PathVariable Long id, @RequestBody PetRequest petRequest);
     public ResponseEntity<Pet> createPet(@RequestBody PetRequest petRequest);
     public ResponseEntity<Map<String, Boolean>> deletePet(@PathVariable Long id);
