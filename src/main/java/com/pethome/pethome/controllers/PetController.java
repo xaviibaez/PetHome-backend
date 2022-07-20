@@ -12,6 +12,7 @@ import com.pethome.pethome.repository.IPetRepository;
 import com.pethome.pethome.repository.ITypePetRepository;
 import com.pethome.pethome.repository.IUserRepository;
 import com.pethome.pethome.security.services.UserDetailsImpl;
+import com.pethome.pethome.Utils.Utils;
 import com.pethome.pethome.exception.ResourceNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -95,17 +96,13 @@ public class PetController implements IPetController{
 
 		petRepository.save(pet);
 
-		Object userLogged = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-		if (userLogged instanceof UserDetailsImpl) {
-			Long principalId = ((UserDetailsImpl)userLogged).getId();
+		Long principalId = Utils.userLogged();
+		User user = userRepository.findById(principalId).
+			orElseThrow(() -> new ResourceNotFoundException("User not exist with id :" + principalId));
 
-			User user = userRepository.findById(principalId).
-				orElseThrow(() -> new ResourceNotFoundException("User not exist with id :" + principalId));
-
-			user.getPets().add(pet);
-			userRepository.save(user);
-		}
+		user.getPets().add(pet);
+		userRepository.save(user);
 
 		return ResponseEntity.ok(pet);
 	}
@@ -127,6 +124,7 @@ public class PetController implements IPetController{
 		pet.setSterilized(petRequest.getSterilized());
 		pet.setAdopted(petRequest.getAdopted());
 		pet.setUrgentAdoption(petRequest.getUrgentAdoption());
+		pet.setSex(petRequest.getSex());
 		pet.setTypePet(typePet);
 
 		return ResponseEntity.ok(petRepository.save(pet));
@@ -138,7 +136,14 @@ public class PetController implements IPetController{
 	public ResponseEntity<Map<String, Boolean>> deletePet(@PathVariable Long id){
 		Pet pet = petRepository.findById(id).
             orElseThrow(() -> new ResourceNotFoundException("Pet not exist with id :" + id));
-		
+			
+		Long principalId = Utils.userLogged();
+		User user = userRepository.findById(principalId).
+				orElseThrow(() -> new ResourceNotFoundException("User not exist with id :" + principalId));
+
+		user.getPets().remove(pet);
+		userRepository.save(user);
+
 		petRepository.delete(pet);
 		Map<String, Boolean> response = new HashMap<>();
 		response.put("deleted " + "ID: " + pet.getId() + " Name: " + pet.getName(), 
