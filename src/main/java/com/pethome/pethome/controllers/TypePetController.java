@@ -9,6 +9,7 @@ import com.pethome.pethome.payload.response.MessageResponse;
 import com.pethome.pethome.repository.ITypePetRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.pethome.pethome.exception.ResourceDuplicateException;
 import com.pethome.pethome.exception.ResourceNotFoundException;
 
 
@@ -53,7 +55,7 @@ public class TypePetController implements ITypePetController{
 	public ResponseEntity<MessageResponse> createTypePet(@RequestBody TypePet typePetDetails) {
 
 		TypePet typePet = typePetRepository.findByName(typePetDetails.getName()).
-            orElseThrow(() -> new ResourceNotFoundException("Type pet not exist with name :" + typePetDetails.getName()));
+            orElseThrow(() -> new ResourceDuplicateException("Type pet exist with name :" + typePetDetails.getName()));
 
         typePetRepository.save(typePet);
 		return ResponseEntity.ok(new MessageResponse("Type pet registered successfully!")); 
