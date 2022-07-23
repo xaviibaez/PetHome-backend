@@ -11,14 +11,12 @@ import com.pethome.pethome.payload.Pet.PetRequest;
 import com.pethome.pethome.repository.IPetRepository;
 import com.pethome.pethome.repository.ITypePetRepository;
 import com.pethome.pethome.repository.IUserRepository;
-import com.pethome.pethome.security.services.UserDetailsImpl;
 import com.pethome.pethome.Utils.Utils;
 import com.pethome.pethome.exception.ResourceNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
