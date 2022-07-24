@@ -15,6 +15,9 @@ import com.pethome.pethome.Utils.Utils;
 import com.pethome.pethome.exception.ResourceNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.EntityModel;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -57,12 +60,21 @@ public class PetController implements IPetController{
 	}
 	
 	// get pet by id
-	@GetMapping("/pets/{id}")
+	/*@GetMapping("/pets/{id}")
 	public ResponseEntity<Pet> getPetById(@PathVariable Long id) {
 		Pet pet = petRepository.findById(id).
             orElseThrow(() -> new ResourceNotFoundException("Pet not exist with id :" + id));
     	
 		return ResponseEntity.ok(pet);
+	}*/
+	@GetMapping("/pets/{id}")
+	public EntityModel<Pet> getPetById(@PathVariable Long id) {
+		Pet pet = petRepository.findById(id).
+            orElseThrow(() -> new ResourceNotFoundException("Pet not exist with id :" + id));
+    	
+		return EntityModel.of(pet, //
+		linkTo(methodOn(PetController.class).getPetById(id)).withSelfRel(),
+		linkTo(methodOn(PetController.class).getAllPets()).withRel("pets"));
 	}
 
 	// get all pets per user
