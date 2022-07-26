@@ -1,18 +1,18 @@
 package com.pethome.pethome.controllers;
 
-import java.util.List;
 import java.util.Map;
 
 import com.pethome.pethome.models.Pet;
 import com.pethome.pethome.payload.Pet.PetRequest;
 
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 public interface IPetController {
-    public ResponseEntity<List<Pet>> getAllPets();
+    public CollectionModel<EntityModel<Pet>> getAllPets();
     public EntityModel<Pet> getPetById(@PathVariable Long id);
     public ResponseEntity<Pet> getPetByName(@PathVariable String name);
     public ResponseEntity<Pet> updatePet(@PathVariable Long id, @RequestBody PetRequest petRequest);
