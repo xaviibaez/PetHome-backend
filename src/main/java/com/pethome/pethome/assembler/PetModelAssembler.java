@@ -14,10 +14,9 @@ public class PetModelAssembler implements RepresentationModelAssembler<Pet, Enti
 
     @Override
     public EntityModel<Pet> toModel(Pet pet) {
-    
         return EntityModel.of(pet, //
             linkTo(methodOn(PetController.class).getPetById(pet.getId())).withSelfRel(),
-            linkTo(methodOn(PetController.class).getAllPets()).withRel("employees"));
+            linkTo(methodOn(PetController.class).getAllPets()).withRel("pets"));
     }
 }
 

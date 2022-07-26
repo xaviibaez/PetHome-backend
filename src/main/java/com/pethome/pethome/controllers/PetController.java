@@ -13,6 +13,7 @@ import com.pethome.pethome.repository.IPetRepository;
 import com.pethome.pethome.repository.ITypePetRepository;
 import com.pethome.pethome.repository.IUserRepository;
 import com.pethome.pethome.Utils.Utils;
+import com.pethome.pethome.assembler.PetModelAssembler;
 import com.pethome.pethome.exception.ResourceNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,13 +47,14 @@ public class PetController implements IPetController{
 	@Autowired
 	private ITypePetRepository typePetRepository;
 
+	@Autowired
+	private PetModelAssembler petModelAssembler;
+
 	@GetMapping("/pets")
 	public CollectionModel<EntityModel<Pet>> getAllPets(){
 
 	List<EntityModel<Pet>> pets = petRepository.findAll().stream()
-		.map(pet -> EntityModel.of(pet,
-			linkTo(methodOn(PetController.class).getPetById(pet.getId())).withSelfRel(),
-			linkTo(methodOn(PetController.class).getAllPets()).withRel("pets")))
+		.map(petModelAssembler::toModel) //
 		.collect(Collectors.toList());
    
 	 return CollectionModel.of(pets, linkTo(methodOn(PetController.class).getAllPets()).withSelfRel());
@@ -63,9 +65,7 @@ public class PetController implements IPetController{
 		Pet pet = petRepository.findById(id).
             orElseThrow(() -> new ResourceNotFoundException("Pet not exist with id :" + id));
     	
-		return EntityModel.of(pet, //
-		linkTo(methodOn(PetController.class).getPetById(id)).withSelfRel(),
-		linkTo(methodOn(PetController.class).getAllPets()).withRel("pets"));
+		return petModelAssembler.toModel(pet);
 	}
 
 	// get pet by name
