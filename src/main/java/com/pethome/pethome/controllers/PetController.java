@@ -19,6 +19,8 @@ import com.pethome.pethome.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.IanaLinkRelations;
+
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
 import org.springframework.http.ResponseEntity;
@@ -89,7 +91,7 @@ public class PetController implements IPetController{
 	// create pet
 	@PostMapping("/pets")
 	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
-	public ResponseEntity<Pet> createPet(@RequestBody PetRequest petRequest) {
+	public ResponseEntity<?> createPet(@RequestBody PetRequest petRequest) {
 		TypePet typePet = typePetRepository.findById(Long.valueOf(petRequest.getTypePet()))
 			.orElseThrow(() -> new ResourceNotFoundException("Type pet not exist with id :" + petRequest.getTypePet()));
 
@@ -104,8 +106,7 @@ public class PetController implements IPetController{
 		pet.setSex(petRequest.getSex());
 		pet.setTypePet(typePet);
 
-		petRepository.save(pet);
-
+		EntityModel<Pet> entityModel = petModelAssembler.toModel(petRepository.save(pet));
 
 		Long principalId = Utils.userLogged();
 		User user = userRepository.findById(principalId).
@@ -114,7 +115,9 @@ public class PetController implements IPetController{
 		user.getPets().add(pet);
 		userRepository.save(user);
 
-		return ResponseEntity.ok(pet);
+		return ResponseEntity
+			.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri()) //
+      		.body(entityModel);
 	}
 	
 	// update pet
