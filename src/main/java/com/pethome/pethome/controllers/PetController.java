@@ -123,7 +123,7 @@ public class PetController implements IPetController{
 	// update pet
 	@PutMapping("/pets/{id}")
 	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
-	public ResponseEntity<Pet> updatePet(@PathVariable Long id, @RequestBody PetRequest petRequest){
+	public ResponseEntity<EntityModel<Pet>> updatePet(@PathVariable Long id, @RequestBody PetRequest petRequest){
 		Pet pet = petRepository.findById(id).
             orElseThrow(() -> new ResourceNotFoundException("Pet not exist with id :" + id));
 		
@@ -140,7 +140,11 @@ public class PetController implements IPetController{
 		pet.setSex(petRequest.getSex());
 		pet.setTypePet(typePet);
 
-		return ResponseEntity.ok(petRepository.save(pet));
+		EntityModel<Pet> entityModel = petModelAssembler.toModel(petRepository.save(pet));
+
+		return ResponseEntity
+			.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri()) //
+      		.body(entityModel);
 	}
 	
 	// delete pet

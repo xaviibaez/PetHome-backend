@@ -15,7 +15,7 @@ public interface IPetController {
     public CollectionModel<EntityModel<Pet>> getAllPets();
     public EntityModel<Pet> getPetById(@PathVariable Long id);
     public ResponseEntity<Pet> getPetByName(@PathVariable String name);
-    public ResponseEntity<Pet> updatePet(@PathVariable Long id, @RequestBody PetRequest petRequest);
+    public ResponseEntity<EntityModel<Pet>> updatePet(@PathVariable Long id, @RequestBody PetRequest petRequest);
     public ResponseEntity<?> createPet(@RequestBody PetRequest petRequest);
     public ResponseEntity<Map<String, Boolean>> deletePet(@PathVariable Long id);
 }
