@@ -48,13 +48,16 @@ public class User {
   private Set<Role> roles = new HashSet<>();
 
   @OneToMany(
-        cascade = CascadeType.ALL,
-        orphanRemoval = true
-    )
+    cascade = CascadeType.ALL,
+    orphanRemoval = true
+  )
   private List<Pet> pets = new ArrayList<>();
 
-  @OneToMany(mappedBy = "location")
-  private List<Location> locations;
+  @OneToMany(
+    cascade = CascadeType.ALL,
+    orphanRemoval = true
+  )
+  private List<Location> locations = new ArrayList<>();
 
   public User(String username, String email, String password) {
     this.username = username;
