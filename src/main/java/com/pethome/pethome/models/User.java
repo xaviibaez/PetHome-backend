@@ -53,8 +53,8 @@ public class User {
     )
   private List<Pet> pets = new ArrayList<>();
 
-  public User() {
-  }
+  @OneToMany(mappedBy = "location")
+  private List<Location> locations;
 
   public User(String username, String email, String password) {
     this.username = username;

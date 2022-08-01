@@ -51,6 +51,10 @@ public class Pet {
   @JoinColumn(name = "typePet", referencedColumnName = "id")
   private TypePet typePet;
 
+  @ManyToOne()
+  @JoinColumn(name = "user", referencedColumnName = "id")
+  private User user;
+
   public Pet() {
   }
 
