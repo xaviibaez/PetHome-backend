@@ -55,10 +55,6 @@ public class Pet {
   @JoinColumn(name = "user", referencedColumnName = "id")
   private User user;
 
-  public Pet() {
-  }
-
-
   public Pet(String name, String description, String behaviour, int age, boolean sterilized, TypePet typePet) {
     this.name = name;
     this.description = description;
@@ -85,6 +81,9 @@ public class Pet {
     this.name = name;
     this.typePet = typePetDetails;
   }
+
+public Pet() {
+}
 
 public Long getId() {
     return id;
