@@ -22,13 +22,13 @@ public class Location {
   @Size(max = 50)
   private String description;
 
-  @ManyToOne
-  @JoinColumn(name="user_id")
+  @ManyToOne()
+  @JoinColumn(name = "user", referencedColumnName = "id")
   private User user;
 
   @OneToOne
   @JoinColumn(name = "address_id")
-  @RestResource(path = "locationAddress", rel="address")
+  //@RestResource(path = "locationAddress", rel="address")
   private Address address;
 
   public Long getId() {
