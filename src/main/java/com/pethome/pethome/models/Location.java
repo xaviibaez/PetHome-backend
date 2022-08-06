@@ -22,10 +22,6 @@ public class Location {
   @Size(max = 50)
   private String description;
 
-  @ManyToOne()
-  @JoinColumn(name = "user", referencedColumnName = "id")
-  private User user;
-
   @OneToOne
   @JoinColumn(name = "address_id")
   //@RestResource(path = "locationAddress", rel="address")

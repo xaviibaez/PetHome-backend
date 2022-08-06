@@ -51,10 +51,6 @@ public class Pet {
   @JoinColumn(name = "typePet", referencedColumnName = "id")
   private TypePet typePet;
 
-  @ManyToOne()
-  @JoinColumn(name = "user", referencedColumnName = "id")
-  private User user;
-
   public Pet(String name, String description, String behaviour, int age, boolean sterilized, TypePet typePet) {
     this.name = name;
     this.description = description;
@@ -108,7 +104,6 @@ public Long getId() {
   public void setTypePet(TypePet typePet){
     this.typePet = typePet;
   }
-
 
   public String getDescription() {
     return this.description;
