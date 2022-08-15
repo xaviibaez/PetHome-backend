@@ -1,4 +1,4 @@
-package com.pethome.pethome.controllers;
+package com.pethome.pethome.controllers.auth;
 
 import javax.validation.Valid;
 

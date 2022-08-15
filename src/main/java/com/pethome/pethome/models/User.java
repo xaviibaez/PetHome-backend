@@ -113,25 +113,42 @@ public class User {
     this.pets = pets;
   }
 
+  
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  public List<Location> getLocations() {
+    return locations;
+  }
+
+  public void setLocations(List<Location> locations) {
+    this.locations = locations;
+  }
+
   @Override
-    public boolean equals(Object o) {
+  public boolean equals(Object o) {
 
-      if (this == o)
-        return true;
-      if (!(o instanceof User))
-        return false;
+    if (this == o)
+      return true;
+    if (!(o instanceof User))
+      return false;
 
-      User user = (User) o;
-      return Objects.equals(this.id, user.id) && Objects.equals(this.email, user.email);
-    }
+    User user = (User) o;
+    return Objects.equals(this.id, user.id) && Objects.equals(this.email, user.email);
+  }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(this.id, this.email);
-    }
+  @Override
+  public int hashCode() {
+      return Objects.hash(this.id, this.email);
+  }
 
-    @Override
-    public String toString() {
-        return "User{" + "id=" + this.id + ", email='" + this.email + '}';
-    }
+  @Override
+  public String toString() {
+      return "User{" + "id=" + this.id + ", email='" + this.email + '}';
+  }
 }

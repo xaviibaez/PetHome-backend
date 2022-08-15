@@ -1,4 +1,4 @@
-package com.pethome.pethome.controllers;
+package com.pethome.pethome.controllers.typePet;
 
 import java.util.List;
 import java.util.Map;

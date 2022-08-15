@@ -1,4 +1,4 @@
-package com.pethome.pethome.controllers;
+package com.pethome.pethome.controllers.test;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;

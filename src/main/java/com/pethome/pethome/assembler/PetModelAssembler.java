@@ -6,7 +6,7 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;
 
-import com.pethome.pethome.controllers.PetController;
+import com.pethome.pethome.controllers.pet.PetController;
 import com.pethome.pethome.models.Pet;
 
 @Component
