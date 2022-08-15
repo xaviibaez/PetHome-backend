@@ -51,6 +51,14 @@ public class Location {
     this.description = description;
   }
 
+  public Address getAddress() {
+    return address;
+  }
+
+  public void setAddress(Address address) {
+    this.address = address;
+  }
+  
   @Override
   public boolean equals(Object o) {
 
@@ -72,4 +80,6 @@ public class Location {
   public String toString() {
     return "locations {" + "id=" + this.id + ", name='" + this.name + '}';
   }
+
+  
 }
