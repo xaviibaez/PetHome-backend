@@ -6,7 +6,7 @@ import java.util.Map;
 
 import com.pethome.pethome.models.Address;
 import com.pethome.pethome.models.Location;
-import com.pethome.pethome.payload.Pet.AddressRequest;
+import com.pethome.pethome.payload.request.AddressRequest;
 import com.pethome.pethome.payload.response.MessageResponse;
 import com.pethome.pethome.repository.IAddressRepository;
 import com.pethome.pethome.repository.ILocationRepository;

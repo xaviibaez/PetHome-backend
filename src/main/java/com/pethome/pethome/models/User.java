@@ -59,6 +59,9 @@ public class User {
   )
   private List<Location> locations = new ArrayList<>();
 
+  public User(){
+  }
+  
   public User(String username, String email, String password) {
     this.username = username;
     this.email = email;

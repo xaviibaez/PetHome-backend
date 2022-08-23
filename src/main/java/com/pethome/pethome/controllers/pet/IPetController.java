@@ -3,7 +3,7 @@ package com.pethome.pethome.controllers.pet;
 import java.util.Map;
 
 import com.pethome.pethome.models.Pet;
-import com.pethome.pethome.payload.Pet.PetRequest;
+import com.pethome.pethome.payload.request.PetRequest;
 
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;

@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import com.pethome.pethome.models.Pet;
 import com.pethome.pethome.models.TypePet;
 import com.pethome.pethome.models.User;
-import com.pethome.pethome.payload.Pet.PetRequest;
+import com.pethome.pethome.payload.request.PetRequest;
 import com.pethome.pethome.repository.IPetRepository;
 import com.pethome.pethome.repository.ITypePetRepository;
 import com.pethome.pethome.repository.IUserRepository;

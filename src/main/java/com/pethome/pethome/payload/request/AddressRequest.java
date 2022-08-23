@@ -1,4 +1,4 @@
-package com.pethome.pethome.payload.Pet;
+package com.pethome.pethome.payload.request;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
